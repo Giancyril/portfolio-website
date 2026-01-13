@@ -3,9 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Gian Cyril - Portfolio</title>
+    <meta name="description" content="Explore the portfolio of Gian Cyril, a developer, designer, and artist. Projects in web development, UI/UX design, and character art.">
+    <meta name="keywords" content="Portfolio, Developer, Designer, Artist, Web Development, UI/UX, Character Design">
+    <meta name="author" content="Gian Cyril">
+    <meta property="og:title" content="Gian Cyril - Developer, Designer & Artist">
+    <meta property="og:description" content="Showcase of web development, design, and creative projects.">
+    <meta property="og:type" content="website">
+    <link rel="canonical" href="https://giancyril.com">
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-text">Portfolio</span>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="#projects" class="nav-link">Projects</a></li>
+                <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="#skills" class="nav-link">Skills</a></li>
+                <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="nav-cta">
+                <a href="Resume.pdf" download="Royce_Gonsalves_Resume.pdf" class="btn-resume"
+                    style="text-decoration: none; display: inline-block;">
+                    Resume
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="hero-container">
+            <div class="hero-content">
+                <span class="hero-tagline">Developer, Designer & Artist</span>
+                <h1 class="hero-title">
+                    Hello, I'm Gian Cyril
+                </h1>
+                                <div class="profile-section">
+                                        <!-- Main Bio Text -->
+                                        <p class="bio-text">
+                                            Passionate about building beautiful websites and applications. Learning and growing every day.
+                                        </p>
+                                </div>
+                <div class="hero-buttons">
+                    <button class="btn-primary" onclick="window.location.href='#projects'">View My Work</button>
+                    <button class="btn-secondary" onclick="window.location.href='#contact'">Get In Touch</button>
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <img src="./hero.png" alt="Hero Image" class="hero-image">
+            </div>
+        </div>
+    </section>
+
+    <section class="projects" id="projects">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Projects</h2>
+                <p class="section-subtitle">Showcasing innovation and creativity</p>
+            </div>
+            
+            <div class="projects-grid">
+                <div class="project-card" data-category="hrms">
+                    <div class="project-image">
+                        <img class="project-icon" src="./hrms.png" alt="HRMS project">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Human Resource Management System</h3>
+                        <p class="project-description">A comprehensive Human Resource Management System designed to streamline HR operations and employee management.</p>
+                        <div class="project-features">
+                            <ul>
+                                <li>Employee Management</li>
+                                <li>Attendance & Leave Management</li>
+                                <li>Payroll & Salary Management</li>
+                                <li>HR Operations & More</li>
+                            </ul>
+                        </div>
+                        <a href="https://github.com/Giancyril/HRMS" target="_blank" class="btn-outline">View on GitHub</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
     
 </body>
+
 </html>
