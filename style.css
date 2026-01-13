@@ -279,6 +279,8 @@ body {
   font-weight: 700;
   color: var(--text-white);
   letter-spacing: -0.5px;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 .nav-menu {
