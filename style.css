@@ -721,6 +721,17 @@ body {
   font-size: 1.1rem;
   text-decoration: none;
 }
+.contact-item {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.social-grid {
+  display: flex;
+  flex-direction: column; 
+  gap: 1rem;             
+}
 
 .social-link {
   display: flex;
