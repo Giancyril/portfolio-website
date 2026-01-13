@@ -816,6 +816,17 @@ body.light-mode .social-link:hover span {
   transition: opacity 0.2s;
 }
 
+body.light-mode .btn-submit {
+    background: #181818 !important;
+    color: #ffffff !important;   
+}
+
+body.light-mode .btn-submit:hover {
+    background: #181818 !important; 
+    color: #ffffff !important;    
+    opacity: 1;                   
+}
+
 .btn-submit:hover {
   opacity: 0.9;
 }
