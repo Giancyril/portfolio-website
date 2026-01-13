@@ -1,33 +1,226 @@
+/* Light mode: fix section header and subtitle text color for skills and about sections */
+body.light-mode .skills,
+body.light-mode .about {
+  background: #f7f7f7 !important;
+}
+body.light-mode .skills .section-title,
+body.light-mode .about .section-title {
+  color: #181818 !important;
+}
+body.light-mode .skills .section-subtitle,
+body.light-mode .about .section-subtitle {
+  color: #444 !important;
+}
+/* Light mode: fix all text color issues for better contrast */
+body.light-mode,
+body.light-mode p,
+body.light-mode span,
+body.light-mode li,
+body.light-mode .bio-text,
+body.light-mode .category-tag,
+body.light-mode .project-features li,
+body.light-mode .card-content p,
+body.light-mode .section-header,
+body.light-mode .section-title,
+body.light-mode .section-subtitle,
+body.light-mode .project-title,
+body.light-mode .project-description,
+body.light-mode .card-title,
+body.light-mode .skill-name,
+body.light-mode .contact-details h4,
+body.light-mode .contact-details a,
+body.light-mode .form-input,
+body.light-mode .btn-outline,
+body.light-mode .btn-submit {
+  color: #181818 !important;
+}
+
+body.light-mode .project-features li {
+  color: #222 !important;
+}
+
+body.light-mode .project-features li::before {
+  color: #181818 !important;
+}
+
+body.light-mode .card-content p,
+body.light-mode .section-subtitle,
+body.light-mode .project-description,
+body.light-mode .skill-name {
+  color: #444 !important;
+}
+
+body.light-mode .category-tag {
+  background: rgba(0,0,0,0.07);
+  color: #181818 !important;
+}
+
+body.light-mode .btn-outline {
+  border: 1px solid #181818;
+  background: #fff;
+  color: #181818 !important;
+}
+body.light-mode .btn-outline:hover {
+  background: #181818;
+  color: #fff !important;
+}
+body.light-mode .btn-submit {
+  background: #181818;
+  color: #fff !important;
+}
+body.light-mode .btn-submit:hover {
+  background: #444;
+  color: #fff !important;
+}
+/* Light mode: fix project-features arrow color */
+body.light-mode .project-features li::before {
+  color: #181818;
+}
+/* Light mode header and hero-title fixes */
+body.light-mode .navbar {
+  background: rgba(240, 240, 240, 0.85);
+  border-bottom: 1px solid #e0e0e0;
+}
+body.light-mode .nav-logo .logo-text,
+body.light-mode .nav-link,
+body.light-mode .nav-link.active {
+  color: #181818;
+}
+body.light-mode .nav-link.active {
+  font-weight: 700;
+}
+body.light-mode .nav-link.active::after {
+  background: #181818;
+}
+body.light-mode .hero-title {
+  background: none !important;
+  color: #181818 !important;
+  -webkit-text-fill-color: #181818 !important;
+}
 /* Modern Dark Portfolio - Spreadlink Style */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
+
 :root {
-  /* Dark Theme Palette */
+  /* Dark Theme Palette (default) */
   --bg-dark: #050505;
   --bg-card: #0F0F0F;
   --bg-card-hover: #161616;
-  
   --text-white: #FFFFFF;
   --text-gray: #A1A1AA;
   --text-dark: #000000;
-  
   --border-color: #27272A;
-  --accent-color: #FFFFFF; /* Minimalist white accent */
+  --accent-color: #FFFFFF;
   --accent-glow: rgba(255, 255, 255, 0.15);
-
   /* Spacing */
   --space-4: 1rem;
   --space-6: 1.5rem;
   --space-8: 2rem;
   --space-16: 4rem;
   --space-24: 6rem;
-
   /* Radius */
   --radius-lg: 16px;
   --radius-pill: 100px;
-
   /* Fonts */
   --font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+body.light-mode {
+  --bg-dark: #f7f7f7;
+  --bg-card: #fff;
+  --bg-card-hover: #f1f1f1;
+  --text-white: #181818;
+  --text-gray: #444;
+  --text-dark: #fff;
+  --border-color: #e0e0e0;
+  --accent-color: #181818;
+  --accent-glow: rgba(0,0,0,0.08);
+}
+
+body.light-mode {
+  background-color: var(--bg-dark);
+  color: var(--text-white);
+}
+
+body.light-mode .section-title,
+body.light-mode .card-title,
+body.light-mode .project-title {
+  color: #181818;
+}
+
+body.light-mode .section-subtitle,
+body.light-mode .project-description,
+body.light-mode .card-content p,
+body.light-mode .skill-name {
+  color: #444;
+}
+
+body.light-mode .nav-link,
+body.light-mode .nav-link.active,
+body.light-mode .nav-logo .logo-text {
+  color: #181818;
+}
+
+body.light-mode .btn-resume,
+body.light-mode .btn-primary {
+  background: #181818;
+  color: #fff;
+  border: 1px solid #181818;
+}
+
+body.light-mode .btn-resume:hover,
+body.light-mode .btn-primary:hover {
+  background: #fff;
+  color: #181818;
+  border: 1px solid #181818;
+}
+
+body.light-mode .btn-secondary {
+  background: #fff;
+  color: #181818;
+  border: 1px solid #e0e0e0;
+}
+
+body.light-mode .btn-secondary:hover {
+  background: #f1f1f1;
+  color: #181818;
+  border: 1px solid #181818;
+}
+
+body.light-mode .project-card,
+body.light-mode .experience-card,
+body.light-mode .skill-item,
+body.light-mode .contact-form-container {
+  background: #fff;
+  border-color: #e0e0e0;
+}
+
+body.light-mode .project-card:hover,
+body.light-mode .experience-card:hover,
+body.light-mode .skill-item:hover {
+  background: #f1f1f1;
+  border-color: #bbb;
+}
+
+body.light-mode .social-link {
+  background: #fff;
+  color: #181818;
+  border-color: #e0e0e0;
+}
+
+body.light-mode .social-link:hover {
+  background: #181818;
+  color: #fff;
+}
+
+body.light-mode .form-input {
+  background: #f7f7f7;
+  color: #181818;
+  border-color: #e0e0e0;
+}
+
+body.light-mode .form-input:focus {
+  border-color: #181818;
 }
 
 /* Base Styles */

@@ -4,10 +4,37 @@ document.addEventListener('DOMContentLoaded', function () {
     initScrollAnimations();
     initProjectFiltering();
     initContactForm();
-    initSpotlight();
     initAppleStyleEffects();
     initHeroTyping();
+    initThemeToggle();
 });
+
+// THEME TOGGLE
+function initThemeToggle() {
+    const toggleBtn = document.getElementById('theme-toggle');
+    if (!toggleBtn) return;
+
+    // Set initial mode from localStorage or system preference
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+        document.body.classList.add('light-mode');
+        toggleBtn.textContent = '🌞';
+    } else if (savedTheme === 'dark') {
+        document.body.classList.remove('light-mode');
+        toggleBtn.textContent = '🌙';
+    } else if (!prefersDark) {
+        document.body.classList.add('light-mode');
+        toggleBtn.textContent = '🌞';
+    }
+
+    toggleBtn.addEventListener('click', function() {
+        document.body.classList.toggle('light-mode');
+        const isLight = document.body.classList.contains('light-mode');
+        toggleBtn.textContent = isLight ? '🌞' : '🌙';
+        localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    });
+}
 
 // NAVIGATION
 function initNavigation() {
@@ -17,14 +44,41 @@ function initNavigation() {
     // Navbar background on scroll
     if (navbar) {
         window.addEventListener('scroll', () => {
+            const isLight = document.body.classList.contains('light-mode');
             if (window.scrollY > 50) {
-                navbar.style.background = 'rgba(5, 5, 5, 0.95)';
-                navbar.style.borderBottom = '1px solid #333';
+                if (isLight) {
+                    navbar.style.background = 'rgba(240, 240, 240, 0.95)';
+                    navbar.style.borderBottom = '1px solid #e0e0e0';
+                } else {
+                    navbar.style.background = 'rgba(5, 5, 5, 0.95)';
+                    navbar.style.borderBottom = '1px solid #333';
+                }
             } else {
-                navbar.style.background = 'rgba(5, 5, 5, 0.7)';
-                navbar.style.borderBottom = '1px solid transparent';
+                if (isLight) {
+                    navbar.style.background = 'rgba(240, 240, 240, 0.85)';
+                    navbar.style.borderBottom = '1px solid #e0e0e0';
+                } else {
+                    navbar.style.background = 'rgba(5, 5, 5, 0.7)';
+                    navbar.style.borderBottom = '1px solid transparent';
+                }
             }
         });
+        // Also update on theme toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        if (themeToggle) {
+            themeToggle.addEventListener('click', () => {
+                setTimeout(() => {
+                    const isLight = document.body.classList.contains('light-mode');
+                    if (window.scrollY > 50) {
+                        navbar.style.background = isLight ? 'rgba(240, 240, 240, 0.95)' : 'rgba(5, 5, 5, 0.95)';
+                        navbar.style.borderBottom = isLight ? '1px solid #e0e0e0' : '1px solid #333';
+                    } else {
+                        navbar.style.background = isLight ? 'rgba(240, 240, 240, 0.85)' : 'rgba(5, 5, 5, 0.7)';
+                        navbar.style.borderBottom = isLight ? '1px solid #e0e0e0' : '1px solid transparent';
+                    }
+                }, 10);
+            });
+        }
     }
 
     // Active link highlighting
@@ -170,10 +224,9 @@ function initHeroTyping() {
     if (!tagline) return;
 
     const roles = [
-        "Developer & Designer",
-        "AI explorer",
-        "Full Stack Developer",
-        "UI/UX Designer"
+        "Developer",
+        "Designer",
+        "Artist"
         
     ];
 
