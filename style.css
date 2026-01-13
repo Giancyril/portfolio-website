@@ -471,7 +471,7 @@ body {
   position: relative;
   border-radius: 50%;
   overflow: hidden;
-  margin: 0 auto;
+  margin: -70px auto 0 auto;
 }
 
 .hero-image {
@@ -480,6 +480,11 @@ body {
   object-fit: cover;
   display: block;
   border-radius: 50%;
+  border: 4px solid transparent;
+}
+
+body.light-mode .hero-image {
+  border: 4px solid #181818;
 }
 
 /* Section Headers */
