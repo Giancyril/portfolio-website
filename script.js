@@ -9,29 +9,37 @@ document.addEventListener('DOMContentLoaded', function () {
     initThemeToggle();
 });
 
-// THEME TOGGLE
+// Theme toggle
 function initThemeToggle() {
     const toggleBtn = document.getElementById('theme-toggle');
-    if (!toggleBtn) return;
+    const themeIcon = document.getElementById('theme-icon');
+    if (!toggleBtn || !themeIcon) return;
 
-    // Set initial mode from localStorage or system preference
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'light') {
+
+    function updateIcon(isLight) {
+        if (isLight) {
+            themeIcon.className = 'far fa-moon'; 
+        } else {
+            themeIcon.className = 'far fa-sun';
+        }
+    }
+
+    // Initial Load
+    const currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+    if (currentTheme === 'light') {
         document.body.classList.add('light-mode');
-        toggleBtn.textContent = '🌞';
-    } else if (savedTheme === 'dark') {
+        updateIcon(true);
+    } else {
         document.body.classList.remove('light-mode');
-        toggleBtn.textContent = '🌙';
-    } else if (!prefersDark) {
-        document.body.classList.add('light-mode');
-        toggleBtn.textContent = '🌞';
+        updateIcon(false);
     }
 
     toggleBtn.addEventListener('click', function() {
         document.body.classList.toggle('light-mode');
         const isLight = document.body.classList.contains('light-mode');
-        toggleBtn.textContent = isLight ? '🌞' : '🌙';
+        updateIcon(isLight);
         localStorage.setItem('theme', isLight ? 'light' : 'dark');
     });
 }

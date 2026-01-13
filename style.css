@@ -1,3 +1,6 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
 body.light-mode .skills,
 body.light-mode .about {
   background: #f7f7f7 !important;
@@ -68,7 +71,7 @@ body.light-mode .btn-submit {
   color: #fff !important;
 }
 body.light-mode .btn-submit:hover {
-  background: #444;
+  background: #181818;
   color: #fff !important;
 }
 
@@ -97,7 +100,7 @@ body.light-mode .hero-title {
   -webkit-text-fill-color: #181818 !important;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
 
 
 :root {
@@ -315,17 +318,21 @@ body {
 .btn-resume {
   background: var(--text-white);
   color: var(--bg-dark);
-  border: none;
+  border: 1px solid transparent;
   padding: 0.6rem 1.4rem;
   border-radius: var(--radius-pill);
   font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
-  transition: transform 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 .btn-resume:hover {
-  transform: scale(1.05);
+  background: #181818;
+  color: #f1f1f1;
+  border: 1px solid #fff;
+  transform: none !important;
+  box-shadow: none !important
 }
 
 /* Hero Section */
@@ -470,7 +477,7 @@ body {
   position: relative;
   border-radius: 50%;
   overflow: hidden;
-  margin: -70px auto 0 auto;
+  margin: -80px auto 0 auto;
 }
 
 .hero-image {
@@ -827,7 +834,7 @@ body.light-mode .btn-submit:hover {
 }
 
 .btn-submit:hover {
-  opacity: 0.9;
+  opacity: 1;
 }
 
 
