@@ -1,4 +1,3 @@
-/* Light mode: fix section header and subtitle text color for skills and about sections */
 body.light-mode .skills,
 body.light-mode .about {
   background: #f7f7f7 !important;
@@ -11,7 +10,7 @@ body.light-mode .skills .section-subtitle,
 body.light-mode .about .section-subtitle {
   color: #444 !important;
 }
-/* Light mode: fix all text color issues for better contrast */
+
 body.light-mode,
 body.light-mode p,
 body.light-mode span,
@@ -72,11 +71,11 @@ body.light-mode .btn-submit:hover {
   background: #444;
   color: #fff !important;
 }
-/* Light mode: fix project-features arrow color */
+
 body.light-mode .project-features li::before {
   color: #181818;
 }
-/* Light mode header and hero-title fixes */
+
 body.light-mode .navbar {
   background: rgba(240, 240, 240, 0.85);
   border-bottom: 1px solid #e0e0e0;
@@ -97,7 +96,7 @@ body.light-mode .hero-title {
   color: #181818 !important;
   -webkit-text-fill-color: #181818 !important;
 }
-/* Modern Dark Portfolio - Spreadlink Style */
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 
@@ -831,14 +830,7 @@ body.light-mode .btn-submit:hover {
   opacity: 0.9;
 }
 
-/* Footer */
-.footer {
-  padding: 2rem 0;
-  text-align: center;
-  border-top: 1px solid var(--border-color);
-  color: var(--text-gray);
-  font-size: 0.9rem;
-}
+
 
 /* Progress Bar */
 .progress-bar {
@@ -896,12 +888,5 @@ body.light-mode .btn-submit:hover {
   .hero-title {
     font-size: 2.5rem;
   }
-
-  .spotlight-wrapper {
-      grid-template-columns: 1fr;
-      gap: 2rem;
-      text-align: center;
-  }
-  
-  .spotlight-info { align-items: center; }
 }
+
