@@ -768,6 +768,26 @@ body.light-mode .hero-image {
     box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.2);
 }
 
+body.light-mode .social-link {
+    background: #ffffff; 
+    color: #181818 !important; 
+    border-color: #181818;
+}
+
+body.light-mode .social-link span {
+    color: #181818 !important;
+}
+
+body.light-mode .social-link:hover {
+    background: #181818;
+    color: #ffffff !important;
+    border-color: #181818;
+}
+
+body.light-mode .social-link:hover span {
+    color: #ffffff !important;
+}
+
 .form-input {
   width: 100%;
   padding: 1rem;
