@@ -1,241 +1,157 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // Initialize all functionality
     initNavigation();
-    initScrollAnimations();
-    initProjectFiltering();
-    initContactForm();
-    initAppleStyleEffects();
-    initHeroTyping();
+    initMobileMenu();
     initThemeToggle();
+    initHeroTyping();
+    initProjectFiltering();
+    initSkillBars();
+    initCopyEmail();
+    initContactForm();
+    initRippleEffect();
+    initScrollAnimations();
 });
 
-// Theme toggle
+// ==========================================================================
+// TOAST NOTIFICATIONS
+// ==========================================================================
+function showToast(message, icon = 'fa-solid fa-check') {
+    const toastContainer = document.getElementById('toastContainer');
+    if (!toastContainer) return;
+
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.innerHTML = `<i class="${icon}" style="color: var(--accent-primary);"></i> <span>${message}</span>`;
+
+    toastContainer.appendChild(toast);
+
+    setTimeout(() => {
+        if (toast.parentNode) {
+            toast.parentNode.removeChild(toast);
+        }
+    }, 3600);
+}
+
+// ==========================================================================
+// THEME TOGGLE (DARK / LIGHT MODE)
+// ==========================================================================
 function initThemeToggle() {
     const toggleBtn = document.getElementById('theme-toggle');
     const themeIcon = document.getElementById('theme-icon');
     if (!toggleBtn || !themeIcon) return;
 
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-    function updateIcon(isLight) {
+    function setLightMode(isLight) {
         if (isLight) {
-            themeIcon.className = 'far fa-moon'; 
+            document.body.classList.add('light-mode');
+            themeIcon.className = 'fa-regular fa-moon';
         } else {
-            themeIcon.className = 'far fa-sun';
+            document.body.classList.remove('light-mode');
+            themeIcon.className = 'fa-regular fa-sun';
         }
     }
 
-    // Initial Load
-    const currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
-    if (currentTheme === 'light') {
-        document.body.classList.add('light-mode');
-        updateIcon(true);
-    } else {
-        document.body.classList.remove('light-mode');
-        updateIcon(false);
-    }
+    // Initial state setup
+    const initialLight = savedTheme === 'light' || (!savedTheme && !prefersDark);
+    setLightMode(initialLight);
 
-    toggleBtn.addEventListener('click', function() {
-        document.body.classList.toggle('light-mode');
-        const isLight = document.body.classList.contains('light-mode');
-        updateIcon(isLight);
-        localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    toggleBtn.addEventListener('click', function () {
+        const isCurrentlyLight = document.body.classList.contains('light-mode');
+        const newLightState = !isCurrentlyLight;
+        setLightMode(newLightState);
+        localStorage.setItem('theme', newLightState ? 'light' : 'dark');
+        showToast(newLightState ? 'Switched to Light Theme' : 'Switched to Dark Theme', newLightState ? 'fa-regular fa-moon' : 'fa-regular fa-sun');
     });
 }
 
-// NAVIGATION
+// ==========================================================================
+// NAVIGATION & SCROLLSPY
+// ==========================================================================
 function initNavigation() {
     const navbar = document.getElementById('navbar');
     const navLinks = document.querySelectorAll('.nav-link');
-
-    // Navbar background on scroll
-    if (navbar) {
-        window.addEventListener('scroll', () => {
-            const isLight = document.body.classList.contains('light-mode');
-            if (window.scrollY > 50) {
-                if (isLight) {
-                    navbar.style.background = 'rgba(240, 240, 240, 0.95)';
-                    navbar.style.borderBottom = '1px solid #e0e0e0';
-                } else {
-                    navbar.style.background = 'rgba(5, 5, 5, 0.95)';
-                    navbar.style.borderBottom = '1px solid #333';
-                }
-            } else {
-                if (isLight) {
-                    navbar.style.background = 'rgba(240, 240, 240, 0.85)';
-                    navbar.style.borderBottom = '1px solid #e0e0e0';
-                } else {
-                    navbar.style.background = 'rgba(5, 5, 5, 0.7)';
-                    navbar.style.borderBottom = '1px solid transparent';
-                }
-            }
-        });
-        // Also update on theme toggle
-        const themeToggle = document.getElementById('theme-toggle');
-        if (themeToggle) {
-            themeToggle.addEventListener('click', () => {
-                setTimeout(() => {
-                    const isLight = document.body.classList.contains('light-mode');
-                    if (window.scrollY > 50) {
-                        navbar.style.background = isLight ? 'rgba(240, 240, 240, 0.95)' : 'rgba(5, 5, 5, 0.95)';
-                        navbar.style.borderBottom = isLight ? '1px solid #e0e0e0' : '1px solid #333';
-                    } else {
-                        navbar.style.background = isLight ? 'rgba(240, 240, 240, 0.85)' : 'rgba(5, 5, 5, 0.7)';
-                        navbar.style.borderBottom = isLight ? '1px solid #e0e0e0' : '1px solid transparent';
-                    }
-                }, 10);
-            });
-        }
-    }
-
-    // Active link highlighting
     const sections = document.querySelectorAll('section[id]');
+
+    // Navbar background blur on scroll
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 40) {
+            navbar.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.25)';
+        } else {
+            navbar.style.boxShadow = 'none';
+        }
+    });
+
+    // Active Section Observer
     if (sections.length > 0) {
-        const navObserver = new IntersectionObserver((entries) => {
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -60% 0px',
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    const activeLink = document.querySelector(`.nav-link[href="#${entry.target.id}"]`);
-                    navLinks.forEach(link => link.classList.remove('active'));
-                    if (activeLink) activeLink.classList.add('active');
+                    const id = entry.target.getAttribute('id');
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${id}`) {
+                            link.classList.add('active');
+                        }
+                    });
                 }
             });
-        }, { threshold: 0.3 });
-        sections.forEach(section => navObserver.observe(section));
+        }, observerOptions);
+
+        sections.forEach(section => observer.observe(section));
     }
 }
 
-// SCROLL ANIMATIONS
-function initScrollAnimations() {
-    const animatedElements = document.querySelectorAll('.section-title, .experience-card, .project-card, .skill-item');
-    if (animatedElements.length === 0) return;
+// ==========================================================================
+// MOBILE NAVIGATION DRAWER
+// ==========================================================================
+function initMobileMenu() {
+    const toggleBtn = document.getElementById('mobile-menu-toggle');
+    const drawer = document.getElementById('mobileNavDrawer');
+    const overlay = document.getElementById('mobileNavOverlay');
+    const closeBtn = document.getElementById('mobileDrawerClose');
+    const mobileLinks = document.querySelectorAll('.mobile-nav-link');
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry, index) => {
-            if (entry.isIntersecting) {
-                // Staggered delay based on index of batch
-                setTimeout(() => {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }, 100); 
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.1 });
+    if (!toggleBtn || !drawer || !overlay) return;
 
-    animatedElements.forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(20px)';
-        el.style.transition = 'all 0.6s ease-out';
-        observer.observe(el);
+    function openMenu() {
+        drawer.classList.add('open');
+        overlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+        drawer.classList.remove('open');
+        overlay.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    toggleBtn.addEventListener('click', openMenu);
+    if (closeBtn) closeBtn.addEventListener('click', closeMenu);
+    overlay.addEventListener('click', closeMenu);
+
+    mobileLinks.forEach(link => {
+        link.addEventListener('click', closeMenu);
     });
 }
 
-// PROJECT FILTERING
-function initProjectFiltering() {
-    const categoryBtns = document.querySelectorAll('.category-btn');
-    const projectCards = document.querySelectorAll('.project-card');
-
-    if (categoryBtns.length === 0) return;
-
-    categoryBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const category = btn.getAttribute('data-category');
-
-            categoryBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-
-            projectCards.forEach(card => {
-                const cardCategory = card.getAttribute('data-category');
-                if (category === 'all' || cardCategory === category) {
-                    card.style.display = 'flex';
-                    setTimeout(() => card.style.opacity = '1', 50);
-                } else {
-                    card.style.display = 'none';
-                    card.style.opacity = '0';
-                }
-            });
-        });
-    });
-}
-
-// CONTACT FORM
-function initContactForm() {
-    const form = document.getElementById('contactForm');
-    if (!form) return;
-
-    const inputs = form.querySelectorAll('.form-input');
-
-    // Input Focus Effects
-    inputs.forEach(input => {
-        input.addEventListener('focus', () => input.parentElement.classList.add('focused'));
-        input.addEventListener('blur', () => {
-            if (!input.value) input.parentElement.classList.remove('focused');
-        });
-    });
-
-    // Submit Logic
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const name = document.getElementById('name').value.trim();
-        const email = document.getElementById('email').value.trim();
-        const message = document.getElementById('message').value.trim();
-
-        const subject = `Portfolio Contact from ${name}`;
-        const body = `Name: ${name}\nEmail: ${email}\n\n${message}`;
-        
-        // Opens default mail client
-        window.open(`mailto:mijaresgiancyril@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
-    });
-}
-
-// APPLE STYLE EFFECTS (Ripple & Hover)
-function initAppleStyleEffects() {
-    // Button Ripple
-    const buttons = document.querySelectorAll('.btn-primary, .btn-secondary, .btn-submit, .btn-outline');
-    
-    buttons.forEach(button => {
-        button.addEventListener('click', function(e) {
-            const circle = document.createElement('span');
-            const diameter = Math.max(button.clientWidth, button.clientHeight);
-            const radius = diameter / 2;
-
-            circle.style.width = circle.style.height = `${diameter}px`;
-            circle.style.left = `${e.clientX - button.getBoundingClientRect().left - radius}px`;
-            circle.style.top = `${e.clientY - button.getBoundingClientRect().top - radius}px`;
-            circle.classList.add('ripple');
-
-            const ripple = button.getElementsByClassName('ripple')[0];
-            if (ripple) ripple.remove();
-
-            button.appendChild(circle);
-        });
-    });
-
-    // Keyboard Navigation Accessibility
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Tab') document.body.classList.add('keyboard-nav');
-    });
-    document.addEventListener('mousedown', () => {
-        document.body.classList.remove('keyboard-nav');
-    });
-
-    // Page Load Animation
-    window.addEventListener('load', () => {
-        document.body.style.opacity = '1';
-    });
-}
-
+// ==========================================================================
 // HERO TYPING EFFECT
+// ==========================================================================
 function initHeroTyping() {
-    const tagline = document.querySelector('.hero-tagline');
+    const tagline = document.getElementById('heroTagline');
     if (!tagline) return;
 
     const roles = [
         "Developer",
-        "Designer",
-        "Artist"
-        
+        "UI/UX Designer",
+        "Concept Artist"
     ];
 
     let roleIndex = 0;
@@ -253,20 +169,205 @@ function initHeroTyping() {
             charIndex++;
         }
 
-        let typeSpeed = isDeleting ? 50 : 100;
+        let typeSpeed = isDeleting ? 40 : 90;
 
         if (!isDeleting && charIndex === currentRole.length) {
-            typeSpeed = 3000;
+            typeSpeed = 2500;
             isDeleting = true;
         } else if (isDeleting && charIndex === 0) {
             isDeleting = false;
             roleIndex = (roleIndex + 1) % roles.length;
-            typeSpeed = 500;
+            typeSpeed = 400;
         }
 
         setTimeout(type, typeSpeed);
     }
 
-    // Start loop after initial 3s delay
-    setTimeout(type, 3000);
+    setTimeout(type, 2500);
+}
+
+// ==========================================================================
+// PROJECT CATEGORY FILTERING
+// ==========================================================================
+function initProjectFiltering() {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+
+    if (filterBtns.length === 0 || projectCards.length === 0) return;
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const filterValue = btn.getAttribute('data-filter');
+
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            projectCards.forEach(card => {
+                const cardCategory = card.getAttribute('data-category');
+
+                if (filterValue === 'all' || cardCategory === filterValue) {
+                    card.style.display = 'flex';
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0) scale(1)';
+                    }, 50);
+                } else {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(15px) scale(0.96)';
+                    setTimeout(() => {
+                        card.style.display = 'none';
+                    }, 300);
+                }
+            });
+        });
+    });
+}
+
+// ==========================================================================
+// SKILL PROGRESS BARS ANIMATION
+// ==========================================================================
+function initSkillBars() {
+    const skillFills = document.querySelectorAll('.skill-progress-fill');
+    if (skillFills.length === 0) return;
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const targetWidth = entry.target.getAttribute('data-width');
+                if (targetWidth) {
+                    entry.target.style.width = targetWidth;
+                }
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.2 });
+
+    skillFills.forEach(fill => observer.observe(fill));
+}
+
+// ==========================================================================
+// ONE-CLICK COPY EMAIL
+// ==========================================================================
+function legacyCopy(text, onSuccess, onFail) {
+    try {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.top = '-9999px';
+        ta.style.left = '-9999px';
+        document.body.appendChild(ta);
+        ta.focus();
+        ta.select();
+        const ok = document.execCommand('copy');
+        document.body.removeChild(ta);
+        if (ok) onSuccess(); else onFail();
+    } catch (e) {
+        onFail();
+    }
+}
+
+function initCopyEmail() {
+    const copyBtn = document.getElementById('copyEmailBtn');
+    const emailAddress = document.getElementById('emailAddress');
+
+    if (!copyBtn || !emailAddress) return;
+
+    copyBtn.addEventListener('click', function () {
+        const textToCopy = emailAddress.textContent.trim();
+
+        function onCopySuccess() {
+            showToast('Email copied to clipboard!', 'fa-solid fa-copy');
+            copyBtn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+            setTimeout(() => {
+                copyBtn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+            }, 2500);
+        }
+
+        function onCopyFail() {
+            showToast('Could not copy — please copy manually: ' + textToCopy, 'fa-solid fa-triangle-exclamation');
+        }
+
+        // Try modern Clipboard API first, fall back to legacy execCommand
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(textToCopy).then(onCopySuccess).catch(() => {
+                legacyCopy(textToCopy, onCopySuccess, onCopyFail);
+            });
+        } else {
+            legacyCopy(textToCopy, onCopySuccess, onCopyFail);
+        }
+    });
+}
+
+// ==========================================================================
+// CONTACT FORM SUBMISSION
+// ==========================================================================
+function initContactForm() {
+    const form = document.getElementById('contactForm');
+    if (!form) return;
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const message = document.getElementById('message').value.trim();
+
+        const subject = `Portfolio Inquiry from ${name}`;
+        const body = `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
+
+        window.open(`mailto:mijaresgiancyril@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
+
+        showToast('Opening email client...', 'fa-regular fa-paper-plane');
+        form.reset();
+    });
+}
+
+// ==========================================================================
+// BUTTON RIPPLE EFFECT
+// ==========================================================================
+function initRippleEffect() {
+    const buttons = document.querySelectorAll('.btn-primary, .btn-secondary, .btn-submit, .filter-btn');
+
+    buttons.forEach(button => {
+        button.addEventListener('click', function (e) {
+            const circle = document.createElement('span');
+            const diameter = Math.max(button.clientWidth, button.clientHeight);
+            const radius = diameter / 2;
+
+            const rect = button.getBoundingClientRect();
+            circle.style.width = circle.style.height = `${diameter}px`;
+            circle.style.left = `${e.clientX - rect.left - radius}px`;
+            circle.style.top = `${e.clientY - rect.top - radius}px`;
+            circle.classList.add('ripple');
+
+            const existingRipple = button.querySelector('.ripple');
+            if (existingRipple) existingRipple.remove();
+
+            button.appendChild(circle);
+        });
+    });
+}
+
+// ==========================================================================
+// SCROLL REVEAL ANIMATIONS
+// ==========================================================================
+function initScrollAnimations() {
+    const animatedElements = document.querySelectorAll('.section-header, .experience-card, .project-card, .skill-item, .contact-info-card, .contact-form-container');
+    if (animatedElements.length === 0) return;
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    animatedElements.forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(24px)';
+        el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+        observer.observe(el);
+    });
 }

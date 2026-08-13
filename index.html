@@ -1,266 +1,569 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gian Cyril - Portfolio</title>
-    
+    <title>Gian Cyril</title>
+    <meta name="description"
+        content="Portfolio of Gian Cyril - Full-Stack Developer, UI/UX Designer, and AI Engineer building modern web apps and digital experiences.">
+
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Primary Stylesheet -->
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+    <!-- Navigation Bar -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
-            <div class="nav-logo">
-                <span class="logo-text">Portfolio</span>
-            </div>
+            <a href="#home" class="nav-logo">
+                <span class="logo-text">Gian Cyril</span>
+            </a>
+
             <ul class="nav-menu">
-                <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
-                <li class="nav-item"><a href="#projects" class="nav-link">Projects</a></li>
-                <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
-                <li class="nav-item"><a href="#skills" class="nav-link">Skills</a></li>
-                <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
-            <div class="nav-cta">
-                <a href="Gian_resume.png" target="_blank" class="btn-resume" style="text-decoration: none; display: inline-block;">Resume</a>
-                <button id="theme-toggle" class="btn-resume" style="margin-left: 1rem;" aria-label="Toggle light and dark mode">
+
+            <div class="nav-controls">
+                <a href="Gian_resume.png" target="_blank" class="btn-resume">
+                    <i class="fa-solid fa-file-arrow-down"></i> Resume
+                </a>
+                <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle Theme">
                     <i id="theme-icon" class="fa-regular fa-sun"></i>
+                </button>
+                <button id="mobile-menu-toggle" class="mobile-menu-btn" aria-label="Toggle Mobile Menu">
+                    <i class="fa-solid fa-bars"></i>
                 </button>
             </div>
         </div>
     </nav>
 
+    <!-- Mobile Drawer Overlay -->
+    <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+    <div class="mobile-nav-drawer" id="mobileNavDrawer">
+        <div>
+            <div class="mobile-drawer-header">
+                <div class="nav-logo">
+                    <span class="logo-text">Gian Cyril</span>
+                </div>
+                <button class="mobile-drawer-close" id="mobileDrawerClose">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <ul class="mobile-nav-menu">
+                <li><a href="#home" class="mobile-nav-link active"><i class="fa-solid fa-house"></i> Home</a></li>
+                <li><a href="#projects" class="mobile-nav-link"><i class="fa-solid fa-folder-open"></i> Projects</a>
+                </li>
+                <li><a href="#about" class="mobile-nav-link"><i class="fa-solid fa-user"></i> About</a></li>
+                <li><a href="#skills" class="mobile-nav-link"><i class="fa-solid fa-layer-group"></i> Skills</a></li>
+                <li><a href="#contact" class="mobile-nav-link"><i class="fa-solid fa-paper-plane"></i> Contact</a></li>
+            </ul>
+        </div>
+        <div>
+            <a href="Gian_resume.png" target="_blank" class="btn-primary" style="width: 100%;">
+                <i class="fa-solid fa-file-arrow-down"></i> View Resume
+            </a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
     <section class="hero" id="home">
-        <div class="hero-container">
+        <div class="container hero-container">
             <div class="hero-content">
-                <span class="hero-tagline">Developer, Designer & Artist</span>
+                <div class="hero-tagline-wrap">
+                    <span class="hero-tagline" id="heroTagline">Developer</span>
+                </div>
                 <h1 class="hero-title">
-                    Hello, I'm Gian Cyril
+                    Hello, I'm <span class="gradient-text">Gian Cyril</span>
                 </h1>
-                    <div class="profile-section">
-                         <p class="bio-text">
-                             I build websites that look great and work smoothly. I enjoy learning new things and creating better digital experiences every day.
-                         </p>
+                <p class="bio-text">
+                    A full-stack developer & designer crafting intelligent AI-augmented platforms, high-performance web
+                    systems, and visually captivating digital experiences.
+                </p>
+
+                <!-- Quick Stats Strip -->
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">4+</span>
+                        <span class="stat-label">Years Experience</span>
                     </div>
+                    <div class="stat-item">
+                        <span class="stat-number">50+</span>
+                        <span class="stat-label">Projects Built</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Craft & Quality</span>
+                    </div>
+                </div>
+
                 <div class="hero-buttons">
-                    <button class="btn-primary" onclick="window.location.href='#projects'">View My Work</button>
-                    <button class="btn-secondary" onclick="window.location.href='#contact'">Contact me</button>
+                    <a href="#projects" class="btn-primary">
+                        <i class="fa-solid fa-compass"></i> View My Work
+                    </a>
+                    <a href="#contact" class="btn-secondary">
+                        <i class="fa-regular fa-paper-plane"></i> Let's Connect
+                    </a>
                 </div>
             </div>
 
             <div class="hero-visual">
-                <img src="./hero.png" alt="Hero Image" class="hero-image">
+                <div class="hero-image-wrapper">
+                    <img src="./hero.png" alt="Gian Cyril Profile Photo" class="hero-image">
+                </div>
+
+                <!-- Floating Tech Pills -->
+                <div class="floating-chip chip-1">
+                    <i class="fa-solid fa-code" style="color: #6366F1;"></i> Full-Stack Dev
+                </div>
+                <div class="floating-chip chip-2">
+                    <i class="fa-solid fa-pencil" style="color: #8B5CF6;"></i> Concept Artist
+                </div>
+                <div class="floating-chip chip-3">
+                    <i class="fa-solid fa-palette" style="color: #06B6D4;"></i> UI/UX Designer
+                </div>
+            </div>
+        </div>
+
+        <a href="#projects" class="scroll-indicator" aria-label="Scroll to projects">
+            <span>Explore Work</span>
+            <i class="fa-solid fa-chevron-down"></i>
+        </a>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects" id="projects">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Featured <span class="gradient-text">Projects</span></h2>
+                <p class="section-subtitle">A closer look at the platforms I'm most proud of building.</p>
+            </div>
+
+            <div class="featured-projects-list">
+
+                <div class="featured-project-card">
+                    <div class="featured-project-visual">
+                        <img src="./pulse.png" alt="Pulse AI Analytics Platform">
+                    </div>
+                    <div class="featured-project-body">
+                        <span class="featured-project-tag">AI Platform</span>
+                        <h3 class="featured-project-title">Pulse</h3>
+                        <p class="featured-project-description">
+                            AI-powered data analytics platform chat with spreadsheets and SQL databases in natural
+                            language to generate queries, dashboards, and business insights, with automated data
+                            profiling, forecasting, and real-time metric alerting. Built with FastAPI, Next.js, and
+                            Google Gemini.
+                        </p>
+                        <div class="featured-project-tags">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">OpenAI</span>
+                            <span class="tech-tag">SQL</span>
+                            <span class="tech-tag">Analytics</span>
+                        </div>
+                        <a href="https://github.com/Giancyril/Pulse" target="_blank" class="btn-outline">
+                            <i class="fa-brands fa-github"></i> View GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <div class="featured-project-card">
+                    <div class="featured-project-visual">
+                        <img src="./blueprint.png" alt="Blueprint Architecture AI">
+                    </div>
+                    <div class="featured-project-body">
+                        <span class="featured-project-tag">AI Platform</span>
+                        <h3 class="featured-project-title">Blueprint</h3>
+                        <p class="featured-project-description">
+                            AI-powered system architecture reviewer upload a diagram (digital export or hand-drawn
+                            sketch) and get structured feedback on scalability, reliability, bottlenecks, and design
+                            trade-offs, plus cost estimation, security auditing, IaC generation, and chaos simulation.
+                            Built with Next.js, Gemini Vision, and Mermaid.js.
+                        </p>
+                        <div class="featured-project-tags">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Computer Vision</span>
+                            <span class="tech-tag">Architecture AI</span>
+                            <span class="tech-tag">React</span>
+                        </div>
+                        <a href="https://github.com/Giancyril/ArchCheck" target="_blank" class="btn-outline">
+                            <i class="fa-brands fa-github"></i> View GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <div class="featured-project-card">
+                    <div class="featured-project-visual">
+                        <img src="./synthis.png" alt="Synthis AI Research Assistant">
+                    </div>
+                    <div class="featured-project-body">
+                        <span class="featured-project-tag">AI Platform</span>
+                        <h3 class="featured-project-title">Synthis</h3>
+                        <p class="featured-project-description">
+                            AI-powered research assistant that plans multi-query searches, retrieves and verifies web
+                            sources, and synthesizes grounded, cited reports built with FastAPI, Gemini, and React.
+                        </p>
+                        <div class="featured-project-tags">
+                            <span class="tech-tag">TypeScript</span>
+                            <span class="tech-tag">RAG Pipeline</span>
+                            <span class="tech-tag">LLMs</span>
+                            <span class="tech-tag">Node.js</span>
+                        </div>
+                        <a href="https://github.com/Giancyril/Synthis" target="_blank" class="btn-outline">
+                            <i class="fa-brands fa-github"></i> View GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <div class="featured-project-card">
+                    <div class="featured-project-visual">
+                        <img src="./debrief.png" alt="Debrief AI Meeting Summarizer">
+                    </div>
+                    <div class="featured-project-body">
+                        <span class="featured-project-tag">AI Platform</span>
+                        <h3 class="featured-project-title">Debrief</h3>
+                        <p class="featured-project-description">
+                            Production-grade AI Meeting Intelligence Platform. Features Gemini 2.5 native audio
+                            transcription, grounded action item & decision extraction with source traceability,
+                            zero-fabrication guarantees, automated follow-up email drafting & Markdown/text export.
+                        </p>
+                        <div class="featured-project-tags">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">FastAPI</span>
+                            <span class="tech-tag">Gemini Audio</span>
+                            <span class="tech-tag">Transcription</span>
+                        </div>
+                        <a href="https://github.com/Giancyril/Debrief" target="_blank" class="btn-outline">
+                            <i class="fa-brands fa-github"></i> View GitHub
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="view-all-projects-wrap">
+                <a href="https://github.com/Giancyril?tab=repositories" target="_blank" class="btn-primary">
+                    <i class="fa-brands fa-github"></i> View All Projects on GitHub
+                </a>
             </div>
         </div>
     </section>
 
-    <section class="projects" id="projects">
-    <div class="container">
-        <div class="section-header">
-            <h2 class="section-title">Projects</h2>
-            <p class="section-subtitle">Things I have built and worked on</p>
-        </div>
-        
-        <div class="projects-grid">
-            <div class="project-card" data-category="hrms">
-                <div class="project-image">
-                    <img class="project-icon" src="./hrms.png" alt="HRMS project">
-                </div>
-                <div class="project-content">
-                    <h3 class="project-title">HRMS</h3>
-                    <p class="project-description">A comprehensive system designed to streamline HR operations and employee management.</p>
-                    <a href="https://github.com/Giancyril/HRMS" target="_blank" class="btn-outline">View GitHub</a>
-                </div>
-            </div>
-            
-            <div class="project-card" data-category="lost-found">
-                <div class="project-image">
-                    <img class="project-icon" src="./lost&found.png" alt="Lost and Found">
-                </div>
-                <div class="project-content">
-                    <h3 class="project-title">Lost & Found</h3>
-                    <p class="project-description">A community-driven platform for reporting and retrieving lost items on campus.</p>
-                    <a href="https://github.com/Giancyril/Lost-and-Found" target="_blank" class="btn-outline">View GitHub</a>
-                </div>
-            </div>
-
-            <div class="project-card" data-category="tic-tac-toe">
-                <div class="project-image">
-                    <img class="project-icon" src="./tictactoe.png" alt="Tic Tac Toe Game">
-                </div>
-                <div class="project-content">
-                    <h3 class="project-title">Tic Tac Toe</h3>
-                    <p class="project-description">Interactive web-based game featuring smart move logic and responsive UI.</p>
-                    <a href="https://github.com/Giancyril/Tic-Tac-Toe" target="_blank" class="btn-outline">View GitHub</a>
-                </div>
-            </div>
-
-            <div class="project-card" data-category="borrowers-log">
-                <div class="project-image">
-                    <img class="project-icon" src="./borrowers.png" alt="Borrowers Log">
-                </div>
-                <div class="project-content">
-                    <h3 class="project-title">Borrowers Log</h3>
-                    <p class="project-description">A React-based tracking system for laboratory equipment and resource borrowing.</p>
-                    <a href="https://github.com/Giancyril/Borrowers-Log" target="_blank" class="btn-outline">View GitHub</a>
-                </div>
-            </div>
-
-            <div class="project-card" data-category="records-log">
-                <div class="project-image">
-                    <img class="project-icon" src="./records.png" alt="Records Log">
-                </div>
-                <div class="project-content">
-                    <h3 class="project-title">Records Log</h3>
-                    <p class="project-description">A secure administrative dashboard for managing institutional data and history logs.</p>
-                    <a href="https://github.com/Giancyril/Records-Log" target="_blank" class="btn-outline">View GitHub</a>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-
+    <!-- About Section -->
     <section class="about" id="about">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Experience</h2>
-                <p class="section-subtitle">What I do and how I can help</p>
+                <h2 class="section-title">What I <span class="gradient-text">Do</span></h2>
+                <p class="section-subtitle">Bridging full-stack software development, AI systems, and creative design.
+                </p>
             </div>
+
+            <div class="about-intro">
+                <div class="about-text">
+                    <p>
+                        I am a full-stack engineer and digital designer currently completing my Senior Year in Computer
+                        Studies. Over the past 4+ years, I've built AI-augmented products ranging from natural language
+                        SQL analytics to real-time IoT monitoring dashboards.
+                    </p>
+                    <p>
+                        My philosophy combines technical rigor with strong aesthetic taste creating applications that
+                        perform reliably while delivering memorable user experiences.
+                    </p>
+                </div>
+
+                <!-- Skill Progress Bars -->
+                <ul class="skill-progress-list">
+                    <li>
+                        <div class="skill-progress-label">
+                            <p><i class="fa-solid fa-code" style="color: #8B5CF6;"></i> Full-Stack Development</p>
+                            <span>92%</span>
+                        </div>
+                        <div class="skill-progress-track">
+                            <div class="skill-progress-fill fill-purple" data-width="92%"></div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="skill-progress-label">
+                            <p><i class="fa-solid fa-wand-magic-sparkles" style="color: #3B82F6;"></i> AI & LLM
+                                Integration</p>
+                            <span>88%</span>
+                        </div>
+                        <div class="skill-progress-track">
+                            <div class="skill-progress-fill fill-blue" data-width="88%"></div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="skill-progress-label">
+                            <p><i class="fa-solid fa-palette" style="color: #10B981;"></i> UI/UX & Product Design</p>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-progress-track">
+                            <div class="skill-progress-fill fill-green" data-width="85%"></div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="skill-progress-label">
+                            <p><i class="fa-solid fa-pen-nib" style="color: #F43F5E;"></i> Character & Visual Art</p>
+                            <span>89%</span>
+                        </div>
+                        <div class="skill-progress-track">
+                            <div class="skill-progress-fill fill-rose" data-width="89%"></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Specialty Cards Grid -->
             <div class="experience-grid">
-                <div class="experience-card" data-category="Social Media Platform">
-                    <div class="card-header">
-                        <h3 class="card-title">Developer</h3>
+                <div class="experience-card">
+                    <div class="card-icon-wrap">
+                        <i class="fa-solid fa-laptop-code"></i>
                     </div>
+                    <h3 class="card-title">Full-Stack Developer</h3>
                     <div class="card-content">
-                        <p>I have experience building websites. I enjoy writing clean code and learning new ways to make web applications fast and reliable. </p>
+                        <p>Specialized in clean architecture, responsive frontend interfaces, RESTful API design,
+                            database schemas, and AI workflow integrations.</p>
                     </div>
-                    <div class="card-category">
-                        <p style="color: var(--text-gray); font-size: 0.9rem; margin: 0;">4th Year College Student | 3 Years of Web Development Experience</p>
+                    <div class="card-footer-badge">
+                        <i class="fa-solid fa-graduation-cap"></i> Senior College Student | 4+ Years Dev
                     </div>
                 </div>
 
-                <div class="experience-card" data-category="Digital Marketing">
-                    <div class="card-header">
-                        <h3 class="card-title">Designer</h3>
+                <div class="experience-card">
+                    <div class="card-icon-wrap">
+                        <i class="fa-solid fa-compass-drafting"></i>
                     </div>
+                    <h3 class="card-title">UI/UX Designer</h3>
                     <div class="card-content">
-                        <p>I use tools like Figma and Canva to create websites that look great and make designs that are clean, modern, and user-friendly.</p>
+                        <p>Creating intuitive design systems, interactive prototypes, and modern visual layouts using
+                            Figma and Canva to deliver polished user journeys.</p>
                     </div>
-                    <div class="card-category">
-                        <p style="color: var(--text-gray); font-size: 0.9rem; margin: 0;">Designer using Canva & Figma for Beautiful UI/UX</p>
+                    <div class="card-footer-badge">
+                        <i class="fa-solid fa-bezier-curve"></i> Figma & Canva UI/UX Specialist
                     </div>
                 </div>
 
-                <div class="experience-card" data-category="Development">
-                    <div class="card-header">
-                        <h3 class="card-title">Artist</h3>
+                <div class="experience-card">
+                    <div class="card-icon-wrap">
+                        <i class="fa-solid fa-paint-brush"></i>
                     </div>
+                    <h3 class="card-title">Concept Artist</h3>
                     <div class="card-content">
-                        <p> I create unique character that tell a story. My goal is to use my creativity to make visual experiences that stand out.</p>
+                        <p>Designing custom character art, narrative visual assets, and unique graphic elements that
+                            give web projects distinct personality.</p>
                     </div>
-                    <div class="card-category">
-                        <p style="color: var(--text-gray); font-size: 0.9rem; margin: 0;">Character Design Artist Creating Unique Visual Experiences</p>
+                    <div class="card-footer-badge">
+                        <i class="fa-solid fa-masks-theater"></i> Character Design & Creative Illustration
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    
-
+    <!-- Skills Section -->
     <section class="skills" id="skills">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Skills & Technologies</h2>
-                <p class="section-subtitle">The tools and programs I use</p>
+                <h2 class="section-title">Skills & <span class="gradient-text">Technologies</span></h2>
+                <p class="section-subtitle">Core languages, frameworks, and creative design tools I build with.</p>
             </div>
 
-            <div class="skills-grid">
-                <div class="skill-item">
-                    <img class="skill-icon-img" src="./img/html.png" alt="JavaScript">
-                    <span class="skill-name">HTML</span>
-                </div>
-                <div class="skill-item">
-                    <img class="skill-icon-img" src="./img/css.png" alt="CSS">
-                    <span class="skill-name">CSS</span>
-                </div>
-                <div class="skill-item">
-                    <img class="skill-icon-img" src="./img/js.png" alt="JavaScript">
-                    <span class="skill-name">JavaScript</span>
-                </div>
-                <div class="skill-item">
-                    <img class="skill-icon-img" src="./img/python.png" alt="Python">
-                    <span class="skill-name">Python</span>
-                </div>
-                <div class="skill-item">
-                    <img class="skill-icon-img" src="./img/PHP.png" alt="AI">
-                    <span class="skill-name">PHP</span>
-                </div>
-                <div class="skill-item">
-                    <img class="skill-icon-img" src="./img/git.png" alt="Git">
-                    <span class="skill-name">Git</span>
-                </div>
-                <div class="skill-item">
-                    <img class="skill-icon-img" src="./img/canva.png" alt="AI">
-                    <span class="skill-name">Canva</span>
-                </div>  
-                <div class="skill-item">
-                    <img class="skill-icon-img" src="./img/figma.png" alt="Figma">
-                    <span class="skill-name">Figma</span>
-                </div>
-            </div>
-        </div>
-    </section>
+            <section class="skills" id="skills">
+                <div class="container">
+                    <div class="section-header">
+                        <h2 class="section-title">Skills & <span class="gradient-text">Technologies</span></h2>
+                        <p class="section-subtitle">Core languages, frameworks, and creative design tools I build with.
+                        </p>
+                    </div>
 
-    <section class="contact" id="contact">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Let's Connect</h2>
-                <p class="section-subtitle">Send me a message or find me online</p>
-            </div>
-            <div class="contact-grid">
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <div class="contact-details">
-                            <h3>Contact</h3>
+                    <div class="skills-grid">
+                        <div class="skill-item">
+                            <img class="skill-icon-img" src="./img/html5.svg" alt="HTML5 Icon">
+                            <span class="skill-name">HTML5</span>
                         </div>
-                        <div class="social-links">
-                            <div class="social-grid">
-                                <div class="social-link">
-                                    <span>Facebook</span>
-                                </div>
-                                <a href="https://github.com/Giancyril" target="_blank" class="social-link">
-                                    <span>GitHub</span>
-                                </a>
-                                <div class="social-link">
-                                    <span>Email</span>
-                                </div>
-                            </div>
+                        <div class="skill-item">
+                            <img class="skill-icon-img" src="./img/css.svg" alt="CSS3 Icon">
+                            <span class="skill-name">CSS3</span>
+                        </div>
+                        <div class="skill-item">
+                            <img class="skill-icon-img" src="./img/javascript.svg" alt="JavaScript Icon">
+                            <span class="skill-name">JavaScript</span>
+                        </div>
+                        <div class="skill-item">
+                            <img class="skill-icon-img" src="./img/typescript.svg" alt="TypeScript Icon">
+                            <span class="skill-name">TypeScript</span>
+                        </div>
+                        <div class="skill-item">
+                            <img class="skill-icon-img" src="./img/python.png" alt="Python Icon">
+                            <span class="skill-name">Python</span>
+                        </div>
+                        <div class="skill-item">
+                            <img class="skill-icon-img" src="./img/php.svg" alt="PHP Icon">
+                            <span class="skill-name">PHP</span>
+                        </div>
+                        <div class="skill-item">
+                            <img class="skill-icon-img" src="./img/dart.png" alt="Dart Icon">
+                            <span class="skill-name">Dart</span>
+                        </div>
+                        <div class="skill-item">
+                            <img class="skill-icon-img" src="./img/react.svg" alt="React Icon">
+                            <span class="skill-name">React</span>
+                        </div>
+                        <div class="skill-item">
+                            <img class="skill-icon-img" src="./img/nextdotjs.svg" alt="Next.js Icon">
+                            <span class="skill-name">Next.js</span>
+                        </div>
+                        <div class="skill-item">
+                            <img class="skill-icon-img" src="./img/nodedotjs.svg" alt="Node.js Icon">
+                            <span class="skill-name">Node.js</span>
+                        </div>
+                        <div class="skill-item">
+                            <img class="skill-icon-img" src="./img/fastapi.png" alt="FastAPI Icon">
+                            <span class="skill-name">FastAPI</span>
+                        </div>
+                        <div class="skill-item">
+                            <img class="skill-icon-img" src="./img/postgresql.svg" alt="PostgreSQL Icon">
+                            <span class="skill-name">PostgreSQL</span>
+                        </div>
+                        <div class="skill-item">
+                            <img class="skill-icon-img" src="./img/mysql.svg" alt="MySQL Icon">
+                            <span class="skill-name">MySQL</span>
+                        </div>
+                        <div class="skill-item">
+                            <img class="skill-icon-img" src="./img/prisma.png" alt="Prisma Icon">
+                            <span class="skill-name">Prisma</span>
+                        </div>
+                        <div class="skill-item">
+                            <img class="skill-icon-img" src="./img/git.png" alt="Git Icon">
+                            <span class="skill-name">Git & GitHub</span>
+                        </div>
+                        <div class="skill-item">
+                            <img class="skill-icon-img" src="./img/figma.svg" alt="Figma Icon">
+                            <span class="skill-name">Figma</span>
+                        </div>
+                        <div class="skill-item">
+                            <img class="skill-icon-img" src="./img/canva.png" alt="Canva Icon">
+                            <span class="skill-name">Canva</span>
                         </div>
                     </div>
                 </div>
-                <div class="contact-form-container">
-                    <form class="contact-form" id="contactForm">
-                        <div style="margin-bottom: 1.5rem;">
-                            <input type="text" id="name" name="name" class="form-input" placeholder="Name" required>
-                        </div>
-                        <div style="margin-bottom: 1.5rem;">
-                            <input type="email" id="email" name="email" class="form-input" placeholder="Email" required>
-                        </div>
-                        <div style="margin-bottom: 1.5rem;">
-                            <textarea id="message" name="message" class="form-input" rows="4" placeholder="Message"
-                                required></textarea>
-                        </div>
-                        <button type="submit" class="btn-submit">Send Message</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
+            </section>
 
-    <script src="script.js"></script>
+            <!-- Contact Section -->
+            <section class="contact" id="contact">
+                <div class="container">
+                    <div class="section-header">
+                        <h2 class="section-title">Let's <span class="gradient-text">Connect</span></h2>
+                        <p class="section-subtitle">Have a project idea, collaboration, or opportunity? Drop a message
+                            below!
+                        </p>
+                    </div>
+
+                    <div class="contact-grid">
+                        <!-- Contact Info Card -->
+                        <div class="contact-info-card">
+                            <div>
+                                <h3 class="contact-info-title">Get in Touch</h3>
+                                <p class="contact-info-text">
+                                    I am open to full-time roles, freelance projects, and software collaborations. Feel
+                                    free to
+                                    reach out via email or social links.
+                                </p>
+                            </div>
+
+                            <div>
+                                <span style="font-size: 0.85rem; color: var(--text-muted); font-weight: 600;">DIRECT
+                                    EMAIL</span>
+                                <div class="copy-email-box">
+                                    <span class="email-address" id="emailAddress">mijaresgiancyril@gmail.com</span>
+                                    <button class="btn-copy-email" id="copyEmailBtn">
+                                        <i class="fa-regular fa-copy"></i> Copy
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div>
+                                <span
+                                    style="font-size: 0.85rem; color: var(--text-muted); font-weight: 600; display: block; margin-bottom: 0.8rem;">SOCIAL
+                                    PLATFORMS</span>
+                                <div class="social-links-list">
+                                    <a href="https://github.com/Giancyril" target="_blank" class="social-link-item">
+                                        <div class="social-link-left">
+                                            <i class="fa-brands fa-github"></i>
+                                            <span>GitHub</span>
+                                        </div>
+                                        <i class="fa-solid fa-arrow-up-right-from-square"
+                                            style="font-size: 0.8rem;"></i>
+                                    </a>
+                                    <a href="mailto:mijaresgiancyril@gmail.com" class="social-link-item">
+                                        <div class="social-link-left">
+                                            <i class="fa-solid fa-envelope"></i>
+                                            <span>Email Me</span>
+                                        </div>
+                                        <i class="fa-solid fa-arrow-up-right-from-square"
+                                            style="font-size: 0.8rem;"></i>
+                                    </a>
+                                    <div class="social-link-item">
+                                        <div class="social-link-left">
+                                            <i class="fa-brands fa-facebook"></i>
+                                            <span>Facebook</span>
+                                        </div>
+                                        <span style="font-size: 0.78rem; color: var(--text-muted);">Gian Cyril</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Contact Form Container -->
+                        <div class="contact-form-container">
+                            <form id="contactForm">
+                                <div class="form-group">
+                                    <label for="name" class="form-label">Your Name</label>
+                                    <input type="text" id="name" name="name" class="form-input" placeholder=" "
+                                        required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email" class="form-label">Your Email</label>
+                                    <input type="email" id="email" name="email" class="form-input" placeholder=" "
+                                        required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="message" class="form-label">Your Message</label>
+                                    <textarea id="message" name="message" class="form-input" rows="5"
+                                        placeholder="Tell me about your project or inquiry..." required></textarea>
+                                </div>
+                                <button type="submit" class="btn-submit">
+                                    <i class="fa-regular fa-paper-plane"></i> Send Message
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="footer">
+                <div class="container">
+                    <p>© 2026 Gian Cyril Mijares. Designed & Built with Passion.</p>
+                </div>
+            </footer>
+
+            <!-- Toast Notification Container -->
+            <div class="toast-container" id="toastContainer"></div>
+
+            <!-- Main Script -->
+            <script src="script.js"></script>
 </body>
 
 </html>
